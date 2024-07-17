@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Data {
+extension Data {
     init?(hex: String) {
         let len = hex.count / 2
         var data = Data(capacity: len)
