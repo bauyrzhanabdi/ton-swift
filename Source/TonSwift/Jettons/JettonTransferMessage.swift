@@ -9,14 +9,16 @@ import Foundation
 import BigInt
 
 public struct JettonTransferMessage {
-    public static func internalMessage(jettonAddress: Address,
-                                       amount: BigInt,
-                                       bounce: Bool,
-                                       to: Address,
-                                       from: Address,
-                                       comment: String? = nil) throws -> MessageRelaxed {
+    public static func internalMessage(
+        jettonWalletAddress: Address,
+        amount: BigInt,
+        bounce: Bool,
+        to: Address,
+        from: Address,
+        comment: String? = nil
+    ) throws -> MessageRelaxed {
         let forwardAmount = BigUInt(stringLiteral: "1")
-        let jettonTransferAmount = BigUInt(stringLiteral: "640000000")
+        let jettonTransferAmount = BigUInt(stringLiteral: "66562832")
         let queryId = UInt64(Date().timeIntervalSince1970)
       
         var commentCell: Cell?
@@ -32,7 +34,7 @@ public struct JettonTransferMessage {
                                                     forwardPayload: commentCell)
         
         return MessageRelaxed.internal(
-            to: jettonAddress,
+            to: jettonWalletAddress,
             value: jettonTransferAmount,
             bounce: bounce,
             body: try Builder().store(jettonTransferData).endCell()
